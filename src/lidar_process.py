@@ -25,16 +25,18 @@ def callback(data):
     min_angle = np.argmin(ranges)
     if (min_distance < mindist):
         print("FAULT-PROXIMITY")
-        pub = rospy.Publisher('status', String, queue_size=10)
+        pub = rospy.Publisher('fault', String, queue_size=10)
         pub.publish("FAULT-PROXIMITY")
-        time.sleep(10)
+    else:
+        pub = rospy.Publisher('fault', String, queue_size=10)
+        pub.publish("None")
 
 
 def lidar_node():
     rospy.init_node('lidar_node', anonymous=True)
     rospy.Subscriber("/scan", LaserScan, callback)
     rospy.spin()
-    
+
 
 
 if __name__ == '__main__':
