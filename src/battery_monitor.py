@@ -19,8 +19,8 @@ def callback_battery(data_battery):
     else:
         pub = rospy.Publisher('fault', String, queue_size=10)
         pub.publish('None')
-        time.sleep(1)
         pass
+    time.sleep(1)
 def battery_monitor():
     rospy.init_node('battery_monitor', anonymous=True)
     rospy.Subscriber("battery", Float32, callback_battery)
